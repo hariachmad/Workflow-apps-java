@@ -15,7 +15,12 @@ public class ComplaintService {
     private ComplaintRepo complaintRepo;
 
     public Complaint save(Complaint complaint){
-        return complaintRepo.save(complaint);
+        try {
+            return complaintRepo.save(complaint);    
+        } catch (Exception e) {
+            throw e;
+        }
+        
     };
 
     public Complaint findOne(Integer id){
@@ -26,7 +31,7 @@ public class ComplaintService {
         return complaintRepo.findAll();
     }
 
-        public void removeOne(Integer id){
+    public void removeOne(Integer id){
         complaintRepo.deleteById(id);
     }
 }

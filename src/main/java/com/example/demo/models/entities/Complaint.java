@@ -43,7 +43,9 @@ public class Complaint implements Serializable{
         AttachmentUrl = attachmentUrl;
     }
 
-    
+    public void setId(Integer id){
+        this.id = id;
+    }
 
     public void setTitle(String title) {
         this.title = title;
