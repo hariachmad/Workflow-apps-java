@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.example.demo.dto.ResponseData;
 import com.example.demo.models.entities.Complaint;
 import com.example.demo.services.ComplaintService;
 
@@ -36,15 +38,20 @@ public class ComplaintController {
     }
 
     @PostMapping
-    public Complaint save(@Valid @RequestBody Complaint complaint,Errors errors){
+    public ResponseEntity<ResponseData<Complaint>> save(@Valid @RequestBody Complaint complaint,Errors errors){
+        ResponseData<Complaint> responseData = new ResponseData<>();
         if(errors.hasErrors()){
             for (ObjectError error : errors.getAllErrors()){
-                System.err.println(error.getDefaultMessage());
+                responseData.getMessages().add(error.getDefaultMessage());
             }
-            throw new RuntimeException("Validation Error");
-        }
+            responseData.setStatus(false);
+            responseData.setPayload(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+            }
         try {
-            return complaintService.save(complaint);    
+            responseData.setStatus(true);
+            responseData.setPayload(complaintService.save(complaint));
+            return ResponseEntity.ok(responseData);     
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Gagal Menyimpan data ke database");
         }
