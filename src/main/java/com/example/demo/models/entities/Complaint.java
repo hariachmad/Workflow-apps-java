@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="complaint")
@@ -16,18 +17,22 @@ public class Complaint implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty(message = "title is required")
     private String title;
 
     private String Description;
 
+    @NotEmpty(message = "Category is required")
     private String Category;
 
+    @NotEmpty(message = "Location is required")
     private String Location;
 
     private Integer ApprovalId;
 
     private Date ReportedDate;
 
+    @NotEmpty(message = "Attachment Url is required")
     private String AttachmentUrl;
 
     public Complaint() {
