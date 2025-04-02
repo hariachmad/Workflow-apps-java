@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -22,9 +23,6 @@ public class Complaint implements Serializable{
 
     private String Description;
 
-    @NotEmpty(message = "Category is required")
-    private String Category;
-
     @NotEmpty(message = "Location is required")
     private String Location;
 
@@ -35,14 +33,19 @@ public class Complaint implements Serializable{
     @NotEmpty(message = "Attachment Url is required")
     private String AttachmentUrl;
 
+    @ManyToOne
+    private Category category;
+
+    @ManyToOne
+    private User user;
+
     public Complaint() {
     }
 
-    public Complaint(String title, String description, String category, String location, Date reportedDate,
+    public Complaint(String title, String description, String location, Date reportedDate,
             String attachmentUrl) {
         this.title = title;
         Description = description;
-        Category = category;
         Location = location;
         ReportedDate = reportedDate;
         AttachmentUrl = attachmentUrl;
@@ -62,14 +65,6 @@ public class Complaint implements Serializable{
         Description = description;
     }
 
-
-
-    public void setCategory(String category) {
-        Category = category;
-    }
-
-
-
     public void setLocation(String location) {
         Location = location;
     }
@@ -80,13 +75,9 @@ public class Complaint implements Serializable{
         ApprovalId = approvalId;
     }
 
-
-
     public void setAttachmentUrl(String attachmentUrl) {
         AttachmentUrl = attachmentUrl;
     }
-
-
 
     public Integer getId() {
         return id;
@@ -98,10 +89,6 @@ public class Complaint implements Serializable{
 
     public String getDescription() {
         return Description;
-    }
-
-    public String getCategory() {
-        return Category;
     }
 
     public String getLocation() {
@@ -118,5 +105,13 @@ public class Complaint implements Serializable{
 
     public String getAttachmentUrl() {
         return AttachmentUrl;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }   
+    
+    public Category getCategory() {
+        return this.category;
+    }
 }
