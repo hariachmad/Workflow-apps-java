@@ -2,6 +2,8 @@ package com.example.demo.models.entities;
 
 import java.io.Serializable;
 
+
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +20,9 @@ public class Category implements Serializable {
 
     @Column(length = 100,nullable = false,unique = true)
     private String name;
+
+    @ManyToOne
+    private Observer observer;
 
     public Long getId() {
         return id;

@@ -42,8 +42,7 @@ public class Complaint implements Serializable{
     public Complaint() {
     }
 
-    public Complaint(String title, String description, String location, Date reportedDate,
-            String attachmentUrl) {
+    public Complaint(String title, String description, String location, Date reportedDate, String attachmentUrl) {
         this.title = title;
         Description = description;
         Location = location;
