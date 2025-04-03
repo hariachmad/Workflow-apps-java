@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
@@ -26,6 +27,12 @@ public class Response {
     private String attachmentUrl;
 
     private String responseStatus;
+
+    @ManyToOne
+    private Complaint complaint;
+
+    @ManyToOne
+    private Observer responseBy;
 
     public Response(
             @NotNull(message = "DateTime is required") @FutureOrPresent(message = "DateTime Must now or Present") LocalDate dateTimeResponse,
