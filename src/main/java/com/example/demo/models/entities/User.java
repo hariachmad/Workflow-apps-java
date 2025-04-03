@@ -32,6 +32,20 @@ public class User {
 
     private Integer userRating=0;
 
+    public User(){};
+
+    public User(@NotEmpty(message = "fullname is required") String fullname,
+            @NotEmpty(message = "username is required") String username, String hashPassword,
+            @NotEmpty(message = "phoneNumber is required") String phoneNumber,
+            @NotEmpty(message = "address is required") String address, String urlImgProfile) {
+        this.fullname = fullname;
+        this.username = username;
+        this.hashPassword = hashPassword;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.urlImgProfile = urlImgProfile;
+    }
+
     public Integer getId() {
         return id;
     }

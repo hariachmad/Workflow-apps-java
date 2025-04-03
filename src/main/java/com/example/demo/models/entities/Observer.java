@@ -24,6 +24,8 @@ public class Observer implements Serializable {
     @NotEmpty(message = "department is required")
     private String department;
 
+    public Observer(){};
+
     public Observer(Integer id, String name, String role,String department){
         this.id= id;
         this.name=name;

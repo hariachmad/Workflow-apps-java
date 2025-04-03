@@ -24,6 +24,13 @@ public class Category implements Serializable {
     @ManyToOne
     private Observer observer;
 
+    public Category(){};
+
+    public Category(String name, Observer observer) {
+        this.name = name;
+        this.observer = observer;
+    }
+
     public Long getId() {
         return id;
     }

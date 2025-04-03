@@ -34,6 +34,8 @@ public class Response {
     @ManyToOne
     private Observer responseBy;
 
+    public Response(){};
+
     public Response(
             @NotNull(message = "DateTime is required") @FutureOrPresent(message = "DateTime Must now or Present") LocalDate dateTimeResponse,
             String notes, String attachmentUrl, String responseStatus) {
